@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: monospace;
+        white-space: pre-wrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #eee;
+      }
+      .container {
+        transform: scale(2.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <script>
+      const colors = ["#F05941", "#FFF78A", "#FFC0D9"];
+      const chars = ["O", "X", "U"];
+      function christmasTree(height) {
+        let treeOutput = "";
+        for (let i = 0; i <= height; i++) {
+          if (i == 0) {
+            treeOutput += " ".repeat(height - 1);
+            treeOutput += `<span style="color: #005B41; position: relative; left: -2px">⭐️</span>\n`;
+            continue;
+          }
+          for (j = i; j < height; j++) {
+            treeOutput += "<span> </span>";
+          }
+          for (let j = 0; j <= 2 * i - 1; j++) {
+            if (Math.random() < 0.1) {
+              const color = colors[Math.floor(Math.random() * colors.length)];
+              const char = chars[Math.floor(Math.random() * chars.length)];
+              treeOutput += `<span style="color: ${color}">${char}</span>`;
+            } else {
+              treeOutput += `<span style="color: #005B41">*</span>`;
+            }
+          }
+          treeOutput += "\n";
+        }
+        treeOutput +=
+          " ".repeat(height - 1) +
+          '<span style="position: relative; left: -2px;color: #482121">mWm</span>\n';
+        treeOutput +=
+          " ".repeat(height - 1) +
+          '<span style="position: relative; left: -2px;color: #482121">mWm</span>\n';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        treeOutput += "\n";
+        treeOutput += '<span class="text">Merry Christmas!</span>\n';
+        treeOutput += " ".repeat(6) + '<span class="text">2023</span>\n';
+        treeOutput += " " + '<span class="text">Code by Endrosi</span>';
+        return treeOutput;
+      }
+
+      async function animate() {
+        const height = 8;
+        const container = document.querySelector(".container");
+        while (true) {
+          container.innerHTML = christmasTree(height);
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
